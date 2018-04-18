@@ -1,6 +1,6 @@
 {
-  "myObject": { /* this is my first comment that works just fine for me*/
-      "foo":"bar", /* this is a comment that also works... after comma important */
+  "myObject": {
+      "foo":"bar",
       "foo2":"bar2"
   }
 }
