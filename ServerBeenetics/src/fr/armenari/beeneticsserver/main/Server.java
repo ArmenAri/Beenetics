@@ -8,7 +8,7 @@ public class Server {
 	public static void main(String[] args) {
 		ServerSocket serverSocket;
 		try {
-			serverSocket = new ServerSocket(5588);
+			serverSocket = new ServerSocket(Integer.parseInt(args[0]));
 			Request.peer();
 			Thread t1 = new Thread(new AcceptClient(serverSocket));
 			t1.start();

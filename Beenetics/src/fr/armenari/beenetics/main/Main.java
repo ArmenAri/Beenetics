@@ -87,7 +87,7 @@ public class Main {
 		 */
 		try {
 			System.out.println("[CLIENT] Connection to the server !");
-			socket = new Socket("88.160.202.21", 5588);
+			socket = new Socket(args[0], Integer.parseInt(args[1]));
 			out = new ObjectOutputStream(socket.getOutputStream());
 			out.flush();
 			in = new ObjectInputStream(socket.getInputStream());
