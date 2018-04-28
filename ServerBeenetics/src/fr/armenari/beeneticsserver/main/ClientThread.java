@@ -25,6 +25,7 @@ public class ClientThread implements Runnable {
 		}
 		
 		t = new Thread(this, "Client " + uuid + " thread");
+		t.start();
 	}
 	
 	@SuppressWarnings("deprecation")
