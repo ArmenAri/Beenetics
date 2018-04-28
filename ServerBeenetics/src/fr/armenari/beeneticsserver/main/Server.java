@@ -47,7 +47,7 @@ public class Server implements Runnable {
 			e.printStackTrace();
 		}
 		if (null != s)
-			s.stop();
+			s.stop(); //Always printing Server stopped but works good.
 		System.out.println("Server stopped.");
 	}
 }
