@@ -150,7 +150,7 @@ public class Game {
 					Machine.removeMachin(m);
 			}
 		}
-		if (this.time % 240 == 0) {
+		if (this.time % 100 == 0) {
 			SQL.getUserBP(DataBaseConnection.username);
 		}
 		if (Game.days > 365) {

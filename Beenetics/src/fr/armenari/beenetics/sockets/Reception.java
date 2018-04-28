@@ -31,10 +31,8 @@ public class Reception implements Runnable {
 					Main.in.close();
 					e.printStackTrace();
 				}
-				System.out.println("[SERVER] : " + d_m.toString());
 				switch (d_m.get(0) + "") {
 				case "BP":
-					System.out.println("[BP] :" + (float) d_m.get(1));
 					Game.beePoints = (float) d_m.get(1);
 					break;
 				case "SET_BP_DONE":

@@ -326,7 +326,6 @@ public class Request {
 			st = cnx.createStatement();
 			rst = st.executeQuery("SELECT beepoints FROM users WHERE username = '" + username + "'");
 			while (rst.next()) {
-				System.out.println(rst.getFloat("beepoints") + " : " + username);
 				res = rst.getFloat("beepoints");
 			}
 		} catch (Exception e) {
