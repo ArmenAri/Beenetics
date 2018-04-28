@@ -10,6 +10,7 @@ public class Server implements Runnable {
 	private Thread clientListenerThread;
 	private List<ClientThread> clients = new LinkedList<>();
 	private int uuidNextClient;
+	private boolean isRunning;
 
 	public Server(int port) {
 		try {
@@ -25,29 +26,34 @@ public class Server implements Runnable {
 
 	@Override
 	public void run() {
-		while (true) {
+		isRunning = true;
+		while (isRunning) {
 			try {
 				clients.add(new ClientThread(serverSocket.accept(), uuidNextClient++));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
+
+		for (ClientThread clientThread : clients)
+			if (null != clientThread) {
+				clientThread.disconnect();
+				clients.remove(clientThread);
+			}
+		
+		System.out.println("Server stopped.");
 	}
 
 	public void stop() {
-
+		isRunning = false;
 	}
 
 	public static void main(String[] args) {
-		Server s = null;
 		try {
-			s = new Server(Integer.parseInt(args[0]));
+			new Server(Integer.parseInt(args[0]));
 		} catch (NumberFormatException e) {
 			System.err.println("You must enter a valid port !");
 			e.printStackTrace();
 		}
-		if (null != s)
-			s.stop();
-		System.out.println("Server stopped.");
 	}
 }
