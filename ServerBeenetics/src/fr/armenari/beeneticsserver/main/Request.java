@@ -134,7 +134,8 @@ public class Request {
 			Connection cnx = DriverManager.getConnection(url, userName, password);
 			return cnx;
 		} catch (Exception e) {
-			System.out.println("[ERROR] SQLException" + e);
+			System.out.println("[ERROR] SQLException");
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -156,7 +157,7 @@ public class Request {
 			st.executeUpdate(query);
 			st.close();
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 
 	}
