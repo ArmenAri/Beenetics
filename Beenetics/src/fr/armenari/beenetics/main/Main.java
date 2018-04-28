@@ -31,7 +31,6 @@ import fr.armenari.beenetics.sockets.Reception;
 
 public class Main {
 
-	//Test GitHub
 	public static Game game;
 
 	public static Socket socket;
