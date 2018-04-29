@@ -398,7 +398,7 @@ public class Machine implements Serializable {
 	}
 
 	public static void removeMachin(Machine m) {
-		m.onRemove(Main.game);
+		m.onRemove(Main.getGameInstance());
 		Machine.machines.remove(m);
 		machinesSize -= m.getSize();
 	}

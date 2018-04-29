@@ -1,10 +1,18 @@
 package fr.armenari.beenetics.main.game;
 
+import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.GL_LINE_STRIP;
+import static org.lwjgl.opengl.GL11.GL_MODELVIEW;
+import static org.lwjgl.opengl.GL11.GL_PROJECTION;
 import static org.lwjgl.opengl.GL11.glBegin;
+import static org.lwjgl.opengl.GL11.glClear;
+import static org.lwjgl.opengl.GL11.glClearColor;
 import static org.lwjgl.opengl.GL11.glColor4f;
 import static org.lwjgl.opengl.GL11.glEnd;
 import static org.lwjgl.opengl.GL11.glLineWidth;
+import static org.lwjgl.opengl.GL11.glLoadIdentity;
+import static org.lwjgl.opengl.GL11.glMatrixMode;
+import static org.lwjgl.opengl.GL11.glOrtho;
 import static org.lwjgl.opengl.GL11.glVertex2d;
 import static org.lwjgl.opengl.GL11.glVertex2f;
 
@@ -73,10 +81,7 @@ public class Game {
 	public static List<Item> market_bees = new ArrayList<>();
 	public static List<Item> market_items = new ArrayList<>();
 
-	private static Game instance; // Game's instance.
-
 	public Game() {
-		instance = this;
 		this.time = 0;
 		Game.days = 0;
 		DNAQuantity = 0;
@@ -117,14 +122,6 @@ public class Game {
 			}
 		}
 		Inventory.inventory.add(Item.honeyComb);
-	}
-
-	/**
-	 * 
-	 * @return The game's instance
-	 */
-	public static Game getInstance() {
-		return instance;
 	}
 
 	/**
@@ -200,6 +197,15 @@ public class Game {
 	}
 
 	public void render() {
+		glClear(GL_COLOR_BUFFER_BIT);
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glClearColor(0.89f, 0.89f, 0.89f, 1.0f);
+		glOrtho(0, Display.getWidth(), Display.getHeight(), 0, -1, 1);
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+		
+		
 		Machine.machinesGUI();
 		leftSideMenu();
 		if (firstMenu) {

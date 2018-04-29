@@ -7,6 +7,7 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
 
+import fr.armenari.beenetics.main.Main;
 import fr.armenari.beenetics.main.fx.Particle;
 import fr.armenari.beenetics.main.fx.ParticleSystem;
 import fr.armenari.beenetics.main.game.Game;
@@ -321,9 +322,9 @@ public class Apiary extends Machine {
 				&& GUI.button("ADD PRINCESS", Display.getWidth() / 2 - "ADD PRINCESS".length() * 24 / 2,
 						Display.getHeight() / 2 - 128, "ADD PRINCESS".length() * 24 + 2, 2)) {
 			Inventory.invGUIOpened = true;
-			Game.getInstance().setProperties(Game.PROP_ID_CHOOSING_PRINCESS, true);
-			Game.getInstance().setProperties(Game.PROP_ID_CHOOSING_DRONE, false);
-			Game.getInstance().setProperties(Game.PROP_ID_CHOOSING_ADDON, false);
+			Main.getGameInstance().setProperties(Game.PROP_ID_CHOOSING_PRINCESS, true);
+			Main.getGameInstance().setProperties(Game.PROP_ID_CHOOSING_DRONE, false);
+			Main.getGameInstance().setProperties(Game.PROP_ID_CHOOSING_ADDON, false);
 		} else if (this.princess != null) {
 			GUI.color(0.9f, 0.1f, 0.1f, 1.0f);
 			GUI.drawString("There is already a princess in this Apiary !",
@@ -334,9 +335,9 @@ public class Apiary extends Machine {
 		if (this.drone == null && GUI.button("ADD DRONE", Display.getWidth() / 2 - "ADD DRONE".length() * 24 / 2,
 				Display.getHeight() / 2 - 88, "ADD DRONE".length() * 24 + 2, 2)) {
 			Inventory.invGUIOpened = true;
-			Game.getInstance().setProperties(Game.PROP_ID_CHOOSING_PRINCESS, false);
-			Game.getInstance().setProperties(Game.PROP_ID_CHOOSING_DRONE, true);
-			Game.getInstance().setProperties(Game.PROP_ID_CHOOSING_ADDON, false);
+			Main.getGameInstance().setProperties(Game.PROP_ID_CHOOSING_PRINCESS, false);
+			Main.getGameInstance().setProperties(Game.PROP_ID_CHOOSING_DRONE, true);
+			Main.getGameInstance().setProperties(Game.PROP_ID_CHOOSING_ADDON, false);
 		} else if (this.drone != null) {
 			GUI.color(0.9f, 0.1f, 0.1f, 1.0f);
 			GUI.drawString("There is already a drone in this Apiary !",
@@ -347,9 +348,9 @@ public class Apiary extends Machine {
 		if (this.frame == null && GUI.button("ADD FRAME", Display.getWidth() / 2 - "ADD FRAME".length() * 24 / 2,
 				Display.getHeight() / 2 - 48, "ADD FRAME".length() * 24 + 2, 2)) {
 			Inventory.invGUIOpened = true;
-			Game.getInstance().setProperties(Game.PROP_ID_CHOOSING_PRINCESS, false);
-			Game.getInstance().setProperties(Game.PROP_ID_CHOOSING_DRONE, false);
-			Game.getInstance().setProperties(Game.PROP_ID_CHOOSING_ADDON, true);
+			Main.getGameInstance().setProperties(Game.PROP_ID_CHOOSING_PRINCESS, false);
+			Main.getGameInstance().setProperties(Game.PROP_ID_CHOOSING_DRONE, false);
+			Main.getGameInstance().setProperties(Game.PROP_ID_CHOOSING_ADDON, true);
 		} else if (this.frame != null) {
 			GUI.color(0.9f, 0.1f, 0.1f, 1.0f);
 			GUI.drawString("There is already an frame in this Apiary !",

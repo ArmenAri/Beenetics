@@ -6,6 +6,7 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
 
+import fr.armenari.beenetics.main.Main;
 import fr.armenari.beenetics.main.fx.Particle;
 import fr.armenari.beenetics.main.fx.ParticleSystem;
 import fr.armenari.beenetics.main.game.Game;
@@ -169,7 +170,7 @@ public class Centrifuge extends Machine {
 		if (this.comb == null && GUI.button("ADD COMB", Display.getWidth() / 2 - "ADD COMB".length() * 24 / 2,
 				Display.getHeight() / 2 - 128, "ADD COMB".length() * 24 + 2, 2)) {
 			Inventory.invGUIOpened = true;
-			Game.getInstance().setProperties(Game.PROP_ID_CHOOSING_COMB, true);
+			Main.getGameInstance().setProperties(Game.PROP_ID_CHOOSING_COMB, true);
 		} else if (this.comb != null) {
 			GUI.color(0.9f, 0.1f, 0.1f, 1.0f);
 			GUI.drawString("There is already a comb in this centrifuge !",

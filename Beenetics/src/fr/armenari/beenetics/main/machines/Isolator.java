@@ -7,6 +7,7 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
 
+import fr.armenari.beenetics.main.Main;
 import fr.armenari.beenetics.main.fx.Particle;
 import fr.armenari.beenetics.main.fx.ParticleSystem;
 import fr.armenari.beenetics.main.game.Game;
@@ -97,8 +98,8 @@ public class Isolator extends Machine {
 		if (this.bee == null && GUI.button("ADD BEE", Display.getWidth() / 2 - "ADD BEE".length() * 24 / 2,
 				Display.getHeight() / 2 - 128, "ADD BEE".length() * 24 + 2, 2)) {
 			Inventory.invGUIOpened = true;
-			Game.getInstance().setProperties(Game.PROP_ID_CHOOSING_ISOLATOR_BEE, true);
-			Game.getInstance().setProperties(Game.PROP_ID_CHOOSING_ISOLATOR_VIAL, false);
+			Main.getGameInstance().setProperties(Game.PROP_ID_CHOOSING_ISOLATOR_BEE, true);
+			Main.getGameInstance().setProperties(Game.PROP_ID_CHOOSING_ISOLATOR_VIAL, false);
 		} else if (this.bee != null) {
 			GUI.color(0.9f, 0.1f, 0.1f, 1.0f);
 			GUI.drawString("There is already a bee in this isolator !",
@@ -110,8 +111,8 @@ public class Isolator extends Machine {
 				&& GUI.button("ADD EMPTY VIAL", Display.getWidth() / 2 - "ADD EMPTY VIAL".length() * 24 / 2,
 						Display.getHeight() / 2 - 88, "ADD EMPTY VIAL".length() * 24 + 2, 2)) {
 			Inventory.invGUIOpened = true;
-			Game.getInstance().setProperties(Game.PROP_ID_CHOOSING_ISOLATOR_BEE, false);
-			Game.getInstance().setProperties(Game.PROP_ID_CHOOSING_ISOLATOR_VIAL, true);
+			Main.getGameInstance().setProperties(Game.PROP_ID_CHOOSING_ISOLATOR_BEE, false);
+			Main.getGameInstance().setProperties(Game.PROP_ID_CHOOSING_ISOLATOR_VIAL, true);
 		} else if (this.vial != null) {
 			GUI.color(0.9f, 0.1f, 0.1f, 1.0f);
 			GUI.drawString("There is already an empty vial in this Isolator !",

@@ -6,6 +6,7 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 
+import fr.armenari.beenetics.main.Main;
 import fr.armenari.beenetics.main.guis.GUI;
 import fr.armenari.beenetics.main.items.Bee;
 import fr.armenari.beenetics.main.items.Frame;
@@ -27,7 +28,7 @@ public class Market {
 
 		if (GUI.button("Sell Item", Display.getWidth() - 250, 8, 224, 4)) {
 			Inventory.invGUIOpened = true;
-			Game.getInstance().setProperties(Game.PROP_ID_CHOOSING_ITEM_TO_SELL, true);
+			Main.getGameInstance().setProperties(Game.PROP_ID_CHOOSING_ITEM_TO_SELL, true);
 			Market.marketGUIOpened = false;
 		}
 
