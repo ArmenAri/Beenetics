@@ -6,6 +6,7 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
 
+import fr.armenari.beenetics.main.Main;
 import fr.armenari.beenetics.main.fx.Particle;
 import fr.armenari.beenetics.main.fx.ParticleSystem;
 import fr.armenari.beenetics.main.game.Game;
@@ -103,7 +104,7 @@ public class GenePool extends Machine {
 		if (this.bee == null && GUI.button("ADD BEE", Display.getWidth() / 2 - "ADD BEE".length() * 24 / 2,
 				Display.getHeight() / 2 - 128, "ADD BEE".length() * 24 + 2, 2)) {
 			Inventory.invGUIOpened = true;
-			Game.choosingGenePoolBee = true;
+			Main.getGameInstance().setProperties(Game.PROP_ID_CHOOSING_GENE_POOL_BEE, true);
 		} else if (this.bee != null) {
 			GUI.color(0.9f, 0.1f, 0.1f, 1.0f);
 			GUI.drawString("There is already a bee in this gene pool !",

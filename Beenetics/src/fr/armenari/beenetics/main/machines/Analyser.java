@@ -6,6 +6,7 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
 
+import fr.armenari.beenetics.main.Main;
 import fr.armenari.beenetics.main.fx.Particle;
 import fr.armenari.beenetics.main.fx.ParticleSystem;
 import fr.armenari.beenetics.main.game.Game;
@@ -97,8 +98,8 @@ public class Analyser extends Machine {
 		if (this.bee == null && GUI.button("ADD BEE", Display.getWidth() / 2 - "ADD BEE".length() * 24 / 2,
 				Display.getHeight() / 2 - 128, "ADD BEE".length() * 24 + 2, 2)) {
 			Inventory.invGUIOpened = true;
-			Game.choosingAnalyserBee = true;
-			Game.choosingAnalyserDrop = false;
+			Main.getGameInstance().setProperties(Game.PROP_ID_CHOOSING_ANALYSER_BEE, true);
+			Main.getGameInstance().setProperties(Game.PROP_ID_CHOOSING_ANALYSER_DROP, false);
 		} else if (this.bee != null) {
 			GUI.color(0.9f, 0.1f, 0.1f, 1.0f);
 			GUI.drawString("There is already a bee in this analyser !",
@@ -110,8 +111,8 @@ public class Analyser extends Machine {
 				&& GUI.button("ADD HONEY DROP", Display.getWidth() / 2 - "ADD HONEY DROP".length() * 24 / 2,
 						Display.getHeight() / 2 - 88, "ADD HONEY DROP".length() * 24 + 2, 2)) {
 			Inventory.invGUIOpened = true;
-			Game.choosingAnalyserDrop = true;
-			Game.choosingAnalyserBee = false;
+			Main.getGameInstance().setProperties(Game.PROP_ID_CHOOSING_ANALYSER_BEE, false);
+			Main.getGameInstance().setProperties(Game.PROP_ID_CHOOSING_ANALYSER_DROP, true);
 		} else if (this.honeyDrop != null) {
 			GUI.color(0.9f, 0.1f, 0.1f, 1.0f);
 			GUI.drawString("There is already a honey drop in this Analyser !",

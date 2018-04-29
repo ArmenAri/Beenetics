@@ -6,6 +6,7 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
 
+import fr.armenari.beenetics.main.Main;
 import fr.armenari.beenetics.main.fx.Particle;
 import fr.armenari.beenetics.main.fx.ParticleSystem;
 import fr.armenari.beenetics.main.game.Game;
@@ -98,8 +99,8 @@ public class Inoculator extends Machine {
 		if (this.bee == null && GUI.button("ADD BEE", Display.getWidth() / 2 - "ADD BEE".length() * 24 / 2,
 				Display.getHeight() / 2 - 128, "ADD BEE".length() * 24 + 2, 2)) {
 			Inventory.invGUIOpened = true;
-			Game.choosingInoculatorBee = true;
-			Game.choosingInoculatorVial = false;
+			Main.getGameInstance().setProperties(Game.PROP_ID_CHOOSING_INOCULATOR_BEE, true);
+			Main.getGameInstance().setProperties(Game.PROP_ID_CHOOSING_INOCULATOR_VIAL, false);
 		} else if (this.bee != null) {
 			GUI.color(0.9f, 0.1f, 0.1f, 1.0f);
 			GUI.drawString("There is already a bee in this inoculator !",
@@ -110,8 +111,8 @@ public class Inoculator extends Machine {
 		if (this.vial == null && GUI.button("ADD VIAL", Display.getWidth() / 2 - "ADD VIAL".length() * 24 / 2,
 				Display.getHeight() / 2 - 88, "ADD VIAL".length() * 24 + 2, 2)) {
 			Inventory.invGUIOpened = true;
-			Game.choosingInoculatorVial = true;
-			Game.choosingInoculatorBee = false;
+			Main.getGameInstance().setProperties(Game.PROP_ID_CHOOSING_INOCULATOR_BEE, false);
+			Main.getGameInstance().setProperties(Game.PROP_ID_CHOOSING_INOCULATOR_VIAL, true);
 		} else if (this.vial != null) {
 			GUI.color(0.9f, 0.1f, 0.1f, 1.0f);
 			GUI.drawString("There is already a vial in this inoculator !",

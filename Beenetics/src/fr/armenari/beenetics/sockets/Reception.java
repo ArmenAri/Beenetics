@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import fr.armenari.beenetics.main.Main;
 import fr.armenari.beenetics.main.game.Game;
 import fr.armenari.beenetics.main.items.Bee;
 import fr.armenari.beenetics.main.items.Item;
@@ -28,7 +27,6 @@ public class Reception implements Runnable {
 				try {
 					d_m = (ArrayList<Object>) in.readObject();
 				} catch (ClassNotFoundException e) {
-					Main.in.close();
 					e.printStackTrace();
 				}
 				switch (d_m.get(0) + "") {
