@@ -29,59 +29,59 @@ public class Inventory {
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
 		if (Apiary.GUIOpened) {
 			GUI.color(0.3f, 0.3f, 0.3f, 1.0f);
-			if (Game.choosingPrincess) {
+			if (Game.getInstance().getProperties(Game.PROP_ID_CHOOSING_PRINCESS)) {
 				GUI.drawString("Choose princess to add",
 						Display.getWidth() / 2 - "Choose princess to add".length() * 24 / 2, 24 + Game.wheel, 24);
-			} else if (Game.choosingDrone) {
+			} else if (Game.getInstance().getProperties(Game.PROP_ID_CHOOSING_DRONE)) {
 				GUI.drawString("Choose drone to add", Display.getWidth() / 2 - "Choose drone to add".length() * 24 / 2,
 						24 + Game.wheel, 24);
-			} else if (Game.choosingAddon) {
+			} else if (Game.getInstance().getProperties(Game.PROP_ID_CHOOSING_ANALYSER_DROP)) {
 				GUI.drawString("Choose frame to add", Display.getWidth() / 2 - "Choose frame to add".length() * 24 / 2,
 						24 + Game.wheel, 24);
 			}
 		} else if (Centrifuge.GUIOpened) {
 			GUI.color(0.3f, 0.3f, 0.3f, 1.0f);
-			if (Game.choosingComb) {
+			if (Game.getInstance().getProperties(Game.PROP_ID_CHOOSING_COMB)) {
 				GUI.drawString("Choose comb to add", Display.getWidth() / 2 - "Choose comb to add".length() * 24 / 2,
 						24 + Game.wheel, 24);
 			}
 		} else if (GenePool.GUIOpened) {
 			GUI.color(0.3f, 0.3f, 0.3f, 1.0f);
-			if (Game.choosingGenePoolBee) {
+			if (Game.getInstance().getProperties(Game.PROP_ID_CHOOSING_GENE_POOL_BEE)) {
 				GUI.drawString("Choose bee to add", Display.getWidth() / 2 - "Choose bee to add".length() * 24 / 2,
 						24 + Game.wheel, 24);
 			}
 		} else if (Analyser.GUIOpened) {
 			GUI.color(0.3f, 0.3f, 0.3f, 1.0f);
-			if (Game.choosingAnalyserBee) {
+			if (Game.getInstance().getProperties(Game.PROP_ID_CHOOSING_ANALYSER_BEE)) {
 				GUI.drawString("Choose bee to add", Display.getWidth() / 2 - "Choose bee to add".length() * 24 / 2,
 						24 + Game.wheel, 24);
 			}
-			if (Game.choosingAnalyserDrop) {
+			if (Game.getInstance().getProperties(Game.PROP_ID_CHOOSING_ANALYSER_DROP)) {
 				GUI.drawString("Choose honey drop to add",
 						Display.getWidth() / 2 - "Choose honey drop to add".length() * 24 / 2, 24 + Game.wheel, 24);
 			}
 		} else if (Isolator.GUIOpened) {
 			GUI.color(0.3f, 0.3f, 0.3f, 1.0f);
-			if (Game.choosingIsolatorBee) {
+			if (Game.getInstance().getProperties(Game.PROP_ID_CHOOSING_ISOLATOR_BEE)) {
 				GUI.drawString("Choose bee to add", Display.getWidth() / 2 - "Choose bee to add".length() * 24 / 2,
 						24 + Game.wheel, 24);
 			}
-			if (Game.choosingIsolatorVial) {
+			if (Game.getInstance().getProperties(Game.PROP_ID_CHOOSING_ISOLATOR_VIAL)) {
 				GUI.drawString("Choose vial to add", Display.getWidth() / 2 - "Choose vial to add".length() * 24 / 2,
 						24 + Game.wheel, 24);
 			}
 		} else if (Inoculator.GUIOpened) {
 			GUI.color(0.3f, 0.3f, 0.3f, 1.0f);
-			if (Game.choosingInoculatorBee) {
+			if (Game.getInstance().getProperties(Game.PROP_ID_CHOOSING_INOCULATOR_BEE)) {
 				GUI.drawString("Choose bee to add", Display.getWidth() / 2 - "Choose bee to add".length() * 24 / 2,
 						24 + Game.wheel, 24);
 			}
-			if (Game.choosingInoculatorVial) {
+			if (Game.getInstance().getProperties(Game.PROP_ID_CHOOSING_INOCULATOR_VIAL)) {
 				GUI.drawString("Choose vial to add", Display.getWidth() / 2 - "Choose vial to add".length() * 24 / 2,
 						24 + Game.wheel, 24);
 			}
-		} else if (Game.choosingItemToSell) {
+		} else if (Game.getInstance().getProperties(Game.PROP_ID_CHOOSING_ITEM_TO_SELL)) {
 			GUI.color(0.3f, 0.3f, 0.3f, 1.0f);
 			GUI.drawString("Choose item to sell", Display.getWidth() / 2 - "Choose item to sell".length() * 24 / 2,
 					24 + Game.wheel, 24);
@@ -112,25 +112,25 @@ public class Inventory {
 				GUI.drawQuad(x, y, 24 * (subName.length()), 32);
 
 				if (GUI.button(subName, x + 6, y + 8, 120, 2)) {
-					if (Game.choosingItemToSell) {
+					if (Game.getInstance().getProperties(Game.PROP_ID_CHOOSING_ITEM_TO_SELL)) {
 						if (m instanceof Bee) {
 							SQL.insertBee((Bee) m);
 						} else if (m instanceof Item) {
 							SQL.insertItem(m);
 						}
 						inventory.remove(m);
-						Game.choosingItemToSell = false;
+						Game.getInstance().setProperties(Game.PROP_ID_CHOOSING_ITEM_TO_SELL, false);
 						invGUIOpened = false;
 					}
 					if (Apiary.GUIOpened) {
 						if (m instanceof Bee) {
-							if (Game.choosingPrincess) {
+							if (Game.getInstance().getProperties(Game.PROP_ID_CHOOSING_PRINCESS)) {
 								if (((Bee) m).isPrincess()) {
 									((Apiary) Machine.whatApiary).setPrincess(((Bee) m));
 									inventory.remove(i);
 									invGUIOpened = false;
 								}
-							} else if (Game.choosingDrone) {
+							} else if (Game.getInstance().getProperties(Game.PROP_ID_CHOOSING_DRONE)) {
 								if (!((Bee) m).isPrincess()) {
 									((Apiary) Machine.whatApiary).setDrone(((Bee) m));
 									invGUIOpened = false;
@@ -138,7 +138,7 @@ public class Inventory {
 								}
 							}
 						}
-						if (Game.choosingAddon) {
+						if (Game.getInstance().getProperties(Game.PROP_ID_CHOOSING_ADDON)) {
 							if (m.getName().contains("Frame")) {
 								((Apiary) Machine.whatApiary).setFrame(((Frame) m));
 								invGUIOpened = false;
@@ -148,7 +148,7 @@ public class Inventory {
 					}
 					if (Centrifuge.GUIOpened) {
 						if (!(m instanceof Bee)) {
-							if (Game.choosingComb) {
+							if (Game.getInstance().getProperties(Game.PROP_ID_CHOOSING_COMB)) {
 								if (m.getName().contains("Comb")) {
 									((Centrifuge) Machine.whatCentrifuge).setComb(((Item) m));
 									invGUIOpened = false;
@@ -159,7 +159,7 @@ public class Inventory {
 					}
 					if (GenePool.GUIOpened) {
 						if ((m instanceof Bee)) {
-							if (Game.choosingGenePoolBee) {
+							if (Game.getInstance().getProperties(Game.PROP_ID_CHOOSING_GENE_POOL_BEE)) {
 								((GenePool) Machine.whatGenePool).setBee(((Bee) m));
 								invGUIOpened = false;
 								inventory.remove(i);
@@ -168,14 +168,14 @@ public class Inventory {
 					}
 					if (Analyser.GUIOpened) {
 						if (m instanceof Bee) {
-							if (Game.choosingAnalyserBee) {
+							if (Game.getInstance().getProperties(Game.PROP_ID_CHOOSING_ANALYSER_BEE)) {
 								if (!((Bee) m).isAnalysed()) {
 									((Analyser) Machine.whatAnalyser).setBee(((Bee) m));
 									inventory.remove(i);
 									invGUIOpened = false;
 								}
 							}
-						} else if (Game.choosingAnalyserDrop) {
+						} else if (Game.getInstance().getProperties(Game.PROP_ID_CHOOSING_ANALYSER_DROP)) {
 							if (m.getName().equals("Honey Drop")) {
 								((Analyser) Machine.whatAnalyser).setHoneyDrop(m);
 								invGUIOpened = false;
@@ -187,12 +187,12 @@ public class Inventory {
 
 					if (Isolator.GUIOpened) {
 						if (m instanceof Bee) {
-							if (Game.choosingIsolatorBee) {
+							if (Game.getInstance().getProperties(Game.PROP_ID_CHOOSING_ISOLATOR_BEE)) {
 								((Isolator) Machine.whatIsolator).setBee(((Bee) m));
 								inventory.remove(i);
 								invGUIOpened = false;
 							}
-						} else if (Game.choosingIsolatorVial) {
+						} else if (Game.getInstance().getProperties(Game.PROP_ID_CHOOSING_ISOLATOR_VIAL)) {
 							if (m instanceof Vial && ((Vial) m).isEmpty()) {
 								((Isolator) Machine.whatIsolator).setVial(((Vial) m));
 								invGUIOpened = false;
@@ -203,12 +203,12 @@ public class Inventory {
 
 					if (Inoculator.GUIOpened) {
 						if (m instanceof Bee && ((Bee) m).isAnalysed()) {
-							if (Game.choosingInoculatorBee) {
+							if (Game.getInstance().getProperties(Game.PROP_ID_CHOOSING_INOCULATOR_BEE)) {
 								((Inoculator) Machine.whatInoculator).setBee(((Bee) m));
 								inventory.remove(i);
 								invGUIOpened = false;
 							}
-						} else if (Game.choosingInoculatorVial) {
+						} else if (Game.getInstance().getProperties(Game.PROP_ID_CHOOSING_INOCULATOR_VIAL)) {
 							if (m instanceof Vial && !((Vial) m).isEmpty()) {
 								((Inoculator) Machine.whatInoculator).setVial(((Vial) m));
 								invGUIOpened = false;

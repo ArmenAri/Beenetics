@@ -27,7 +27,7 @@ public class Market {
 
 		if (GUI.button("Sell Item", Display.getWidth() - 250, 8, 224, 4)) {
 			Inventory.invGUIOpened = true;
-			Game.choosingItemToSell = true;
+			Game.getInstance().setProperties(Game.PROP_ID_CHOOSING_ITEM_TO_SELL, true);
 			Market.marketGUIOpened = false;
 		}
 

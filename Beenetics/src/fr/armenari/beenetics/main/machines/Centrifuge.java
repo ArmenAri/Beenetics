@@ -169,7 +169,7 @@ public class Centrifuge extends Machine {
 		if (this.comb == null && GUI.button("ADD COMB", Display.getWidth() / 2 - "ADD COMB".length() * 24 / 2,
 				Display.getHeight() / 2 - 128, "ADD COMB".length() * 24 + 2, 2)) {
 			Inventory.invGUIOpened = true;
-			Game.choosingComb = true;
+			Game.getInstance().setProperties(Game.PROP_ID_CHOOSING_COMB, true);
 		} else if (this.comb != null) {
 			GUI.color(0.9f, 0.1f, 0.1f, 1.0f);
 			GUI.drawString("There is already a comb in this centrifuge !",

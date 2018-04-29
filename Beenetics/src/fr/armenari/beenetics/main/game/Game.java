@@ -33,6 +33,19 @@ import fr.armenari.beenetics.sockets.SQL;
 
 public class Game {
 
+	public static final int PROP_ID_CHOOSING_PRINCESS = 0;
+	public static final int PROP_ID_CHOOSING_DRONE = 1;
+	public static final int PROP_ID_CHOOSING_ADDON = 2;
+	public static final int PROP_ID_CHOOSING_COMB = 3;
+	public static final int PROP_ID_CHOOSING_ANALYSER_BEE = 4;
+	public static final int PROP_ID_CHOOSING_ANALYSER_DROP = 5;
+	public static final int PROP_ID_CHOOSING_GENE_POOL_BEE = 6;
+	public static final int PROP_ID_CHOOSING_ISOLATOR_BEE = 7;
+	public static final int PROP_ID_CHOOSING_ISOLATOR_VIAL = 8;
+	public static final int PROP_ID_CHOOSING_ITEM_TO_SELL = 9;
+	public static final int PROP_ID_CHOOSING_INOCULATOR_VIAL = 10;
+	public static final int PROP_ID_CHOOSING_INOCULATOR_BEE = 11;
+
 	private int time;
 	private int years;
 
@@ -46,24 +59,7 @@ public class Game {
 
 	public static final int sideMenuX = 300;
 
-	public static boolean choosingPrincess = false;
-	public static boolean choosingDrone = false;
-	public static boolean choosingAddon = false;
-
-	public static boolean choosingComb = false;
-
-	public static boolean choosingAnalyserBee = false;
-	public static boolean choosingAnalyserDrop = false;
-
-	public static boolean choosingGenePoolBee = false;
-
-	public static boolean choosingIsolatorBee = false;
-	public static boolean choosingIsolatorVial = false;
-
-	public static boolean choosingItemToSell = false;
-
-	public static boolean choosingInoculatorVial = false;
-	public static boolean choosingInoculatorBee = false;
+	private boolean[] properties = new boolean[12]; // Array which contains properties.
 
 	public static boolean firstMenu = true;
 
@@ -77,7 +73,10 @@ public class Game {
 	public static List<Item> market_bees = new ArrayList<>();
 	public static List<Item> market_items = new ArrayList<>();
 
+	private static Game instance; // Game's instance.
+
 	public Game() {
+		instance = this;
 		this.time = 0;
 		Game.days = 0;
 		DNAQuantity = 0;
@@ -90,7 +89,6 @@ public class Game {
 		Inventory.inventory = new ArrayList<Item>();
 		Market.market = new ArrayList<>();
 
-		
 		Apiary ap = new Apiary();
 		ap.setPrincess(new Bee("fazepd", 6874687654.f));
 		Machine.machinesStore.add(ap);
@@ -121,6 +119,48 @@ public class Game {
 		Inventory.inventory.add(Item.honeyComb);
 	}
 
+	/**
+	 * 
+	 * @return The game's instance
+	 */
+	public static Game getInstance() {
+		return instance;
+	}
+
+	/**
+	 * 
+	 * @param propID
+	 *            ID of the requested property.
+	 * 
+	 * @return The boolean value of the desired game's property.
+	 * 
+	 */
+	public boolean getProperties(int propID) {
+		if (0 > propID || properties.length <= propID) {
+			// TODO : Ajouter une vraie Exception.
+			System.err.println("Bad properties ID : " + propID);
+			return false;
+		}
+		return properties[propID];
+	}
+
+	/**
+	 * 
+	 * @param propID
+	 *            ID of the requested property.
+	 * @param value
+	 *            The desired value for the property.
+	 * 
+	 */
+	public void setProperties(int propID, boolean value) {
+		if (0 > propID || properties.length <= propID) {
+			// TODO : Ajouter une vraie Exception.
+			System.err.println("Bad properties ID : " + propID);
+		} else {
+			properties[propID] = value;
+		}
+	}
+
 	public static void addDNA(float x) {
 		if (DNAQuantity < MAX_DNA)
 			DNAQuantity += x;
@@ -133,11 +173,11 @@ public class Game {
 
 	public void update() {
 		Market.market.clear();
-		for(Item i : Game.market_items) {
+		for (Item i : Game.market_items) {
 			Market.market.add(i);
 		}
-		
-		for(Item b : Game.market_bees) {
+
+		for (Item b : Game.market_bees) {
 			Market.market.add(b);
 		}
 		this.time++;
@@ -326,7 +366,7 @@ public class Game {
 				Market.marketGUIOpened = true;
 				SQL.getDBBees();
 				SQL.getDBItems();
-				
+
 			}
 		}
 		GUI.color(0.9f, 0.9f, 0.9f, 1);
@@ -340,7 +380,7 @@ public class Game {
 			Machine.machinesSize += m.getSize();
 			try {
 				Machine.machines.add(m.getClass().newInstance());
-				SQL.addUserBP(DataBaseConnection.username, - m.getCost());
+				SQL.addUserBP(DataBaseConnection.username, -m.getCost());
 				SQL.getUserBP(DataBaseConnection.username);
 			} catch (InstantiationException e) {
 				e.printStackTrace();
