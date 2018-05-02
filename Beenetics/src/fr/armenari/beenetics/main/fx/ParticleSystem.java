@@ -1,17 +1,12 @@
 package fr.armenari.beenetics.main.fx;
 
-import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
-public class ParticleSystem implements Serializable {
+public class ParticleSystem {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2800577819770462750L;
 
-	private List<Particle> particles = new ArrayList<Particle>();
+	private List<Particle> particles = new LinkedList<>();
 
 	public ParticleSystem(int x, int y, int quantity, Particle p) {
 		for (int i = 0; i < quantity; i++) {
@@ -20,18 +15,18 @@ public class ParticleSystem implements Serializable {
 	}
 
 	public void update() {
-		for (int i = 0; i < particles.size(); i++) {
-			Particle p = particles.get(i);
-			if (p.isRemoved) {
-				particles.remove(p);
+		for (Particle particle : particles) {
+			if (null != particle) {
+				if (particle.isDead())
+					particles.remove(particle);
+				else
+					particle.update();
 			}
-			p.update();
 		}
 	}
 
 	public void render() {
-		for (Particle p : particles) {
+		for (Particle p : particles)
 			p.render();
-		}
 	}
 }
